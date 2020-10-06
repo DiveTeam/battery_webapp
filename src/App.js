@@ -220,7 +220,7 @@ class App extends React.Component {
             this.setState({v1: event.target.value.getFloat32(0,1).toFixed(3)});
             this.updateVoltage();
           });
-          // currentV1Characteristic.startNotifications();
+          currentV1Characteristic.startNotifications();
           currentV1Characteristic.readValue();
         })
 
@@ -232,7 +232,7 @@ class App extends React.Component {
               this.setState({v2: event.target.value.getFloat32(0,1).toFixed(3)});
               this.updateVoltage();
             });
-            // currentV2Characteristic.startNotifications();
+            currentV2Characteristic.startNotifications();
             currentV2Characteristic.readValue();
           });
         })
@@ -245,10 +245,10 @@ class App extends React.Component {
               this.setState({v3: event.target.value.getFloat32(0,1).toFixed(3)});
               this.updateVoltage();
             });
-            // currentV3Characteristic.startNotifications();
+            currentV3Characteristic.startNotifications();
             currentV3Characteristic.readValue();
           });
-        })
+        });
 
         return voltages_service;
       })
@@ -266,7 +266,7 @@ class App extends React.Component {
           currentSOCCharacteristic.addEventListener('characteristicvaluechanged',(event) => {
             this.setState({soc: event.target.value.getUint8()});
           });
-          // currentSOCCharacteristic.startNotifications();
+          currentSOCCharacteristic.startNotifications();
         });
 
         esp32BatteryService.getCharacteristic(bluetooth_current_uuid)
@@ -276,7 +276,7 @@ class App extends React.Component {
           currentCurrentCharacteristic.addEventListener('characteristicvaluechanged',(event) => {
             this.setState({current: event.target.value.getFloat32(0,1).toFixed(3)});
           });
-          // currentCurrentCharacteristic.startNotifications();
+          currentCurrentCharacteristic.startNotifications();
         });
 
         esp32BatteryService.getCharacteristic(bluetooth_temperature_uuid)
@@ -286,7 +286,7 @@ class App extends React.Component {
           currentTemperatureCharacteristic.addEventListener('characteristicvaluechanged',(event) => {
             this.setState({temperature: event.target.value.getFloat32(0,1).toFixed(1)});
           });
-          // currentTemperatureCharacteristic.startNotifications();
+          currentTemperatureCharacteristic.startNotifications();
         });
 
         return battery_service;
