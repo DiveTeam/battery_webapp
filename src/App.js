@@ -222,29 +222,33 @@ class App extends React.Component {
           });
           currentV1Characteristic.startNotifications();
           currentV1Characteristic.readValue();
-        });
+        })
 
-        esp32VoltagesService.getCharacteristic(bluetooth_voltage_2_uuid)
-        .then(characteristic => {
-          currentV2Characteristic = characteristic;
-          currentV2Characteristic.addEventListener('characteristicvaluechanged',(event) => {
-            this.setState({v2: event.target.value.getFloat32(0,1).toFixed(3)});
-            this.updateVoltage();
+        .then( _ => {
+          esp32VoltagesService.getCharacteristic(bluetooth_voltage_2_uuid)
+          .then(characteristic => {
+            currentV2Characteristic = characteristic;
+            currentV2Characteristic.addEventListener('characteristicvaluechanged',(event) => {
+              this.setState({v2: event.target.value.getFloat32(0,1).toFixed(3)});
+              this.updateVoltage();
+            });
+            currentV2Characteristic.startNotifications();
+            currentV2Characteristic.readValue();
           });
-          currentV2Characteristic.startNotifications();
-          currentV2Characteristic.readValue();
-        });
+        })
 
-        esp32VoltagesService.getCharacteristic(bluetooth_voltage_3_uuid)
-        .then(characteristic => {
-          currentV3Characteristic = characteristic;
-          currentV3Characteristic.addEventListener('characteristicvaluechanged',(event) => {
-            this.setState({v3: event.target.value.getFloat32(0,1).toFixed(3)});
-            this.updateVoltage();
+        .then( _ => {
+          esp32VoltagesService.getCharacteristic(bluetooth_voltage_3_uuid)
+          .then(characteristic => {
+            currentV3Characteristic = characteristic;
+            currentV3Characteristic.addEventListener('characteristicvaluechanged',(event) => {
+              this.setState({v3: event.target.value.getFloat32(0,1).toFixed(3)});
+              this.updateVoltage();
+            });
+            currentV3Characteristic.startNotifications();
+            currentV3Characteristic.readValue();
           });
-          currentV3Characteristic.startNotifications();
-          currentV3Characteristic.readValue();
-        });
+        })
 
         return voltages_service;
       })
@@ -333,7 +337,7 @@ class App extends React.Component {
                 if (compatibleHardwareVersion === currentHardwareVersion)
                 {
                   latestCompatibleSoftware = data.firmware[softwareVersionCount]['software'];
-                  if (latestCompatibleSoftware === softwareVersion)
+                  if (latestCompatibleSoftware !== softwareVersion)
                   {
                     console.log(latestCompatibleSoftware);
                     PromptUserForUpdate();

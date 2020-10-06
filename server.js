@@ -2,6 +2,7 @@ const express = require('express');
 const favicon = require('express-favicon');
 const path = require('path');
 const port = process.env.PORT || 8080;
+console.log("PORT:" + port);
 
 
 const app = express();
